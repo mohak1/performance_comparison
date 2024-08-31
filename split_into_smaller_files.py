@@ -7,6 +7,9 @@ from typing import Tuple, Union
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
+# Log file sourced from GitHub project: https://github.com/logpai/loghub
+# Download link (26GB): https://zenodo.org/records/8196385/files/Windows.tar.gz?download=1
+
 SOURCE_FILE_PATH = './text_files/Windows.log'  # big file location
 DESTINATION_DIR = './text_files/smaller_files'  # dir to save the files
 SMALL_FILE_PREFIX = 'small_file'  # prefix of each smaller file

@@ -2,6 +2,7 @@ import logging
 import os
 import sys
 import time
+from typing import List
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
@@ -50,6 +51,24 @@ def validate_path_and_words() -> None:
     log.info('WORDS_TO_SEARCH list contains valid entries')
 
 
+def process_file(file_name: str, dir_path: str, words_to_search: List[str]) -> None:
+    file_path = os.path.join(dir_path, file_name)
+    count_tracker = {i: 0 for i in words_to_search}
+    start_time = time.time()
+    with open(file_path, 'r') as file:
+        for line in file:
+            perform_case_insensitive_search(
+                words=words_to_search,
+                line=line,
+                tracker=count_tracker
+            )
+    duration = time.time() - start_time
+    print(
+        f'Completed searching {file_name}. Results: {count_tracker}. '
+        f'Time taken: {round(duration, 2)} seconds'
+    )
+
+
 def main() -> None:
     try:
         validate_path_and_words()
@@ -57,20 +76,10 @@ def main() -> None:
         sys.exit(str(err))
 
     for file_name in os.listdir(FILES_DIR):
-        file_path = os.path.join(FILES_DIR, file_name)
-        count_tracker = {i: 0 for i in WORDS_TO_SEARCH}
-        start_time = time.time()
-        with open(file_path, 'r') as file:
-            for line in file:
-                perform_case_insensitive_search(
-                    words=WORDS_TO_SEARCH,
-                    line=line,
-                    tracker=count_tracker
-                )
-        duration = time.time() - start_time
-        print(
-            f'Completed searching {file_name}. Results: {count_tracker}. '
-            f'Time taken: {round(duration, 2)} seconds'
+        process_file(
+            file_name=file_name,
+            dir_path=FILES_DIR,
+            words_to_search=WORDS_TO_SEARCH,
         )
 
 

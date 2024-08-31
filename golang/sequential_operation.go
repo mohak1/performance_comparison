@@ -34,17 +34,17 @@ func validate_path_and_words() {
 	info, err := os.Stat(FILES_DIR)
 	if err != nil {
 		if os.IsNotExist(err) {
-			log.Fatal("The location '%v' does not exist. Please "+
+			log.Fatalf("The location '%v' does not exist. Please "+
 				"check the path and try again.", FILES_DIR)
 		}
-		log.Fatal("Error checking the path: %v", FILES_DIR)
+		log.Fatalf("Error checking the path: %v", FILES_DIR)
 	}
-	log.Print("%v is a valid path", FILES_DIR)
+	log.Printf("%v is a valid path", FILES_DIR)
 
 	if info.IsDir() {
-		log.Print("%v is a valid directory", FILES_DIR)
+		log.Printf("%v is a valid directory", FILES_DIR)
 	} else {
-		log.Fatal("The location '%v' is not a directory. Please "+
+		log.Fatalf("The location '%v' is not a directory. Please "+
 			"check the path and try again.", FILES_DIR)
 	}
 

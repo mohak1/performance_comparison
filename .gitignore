@@ -2,4 +2,6 @@
 *.pyc
 *Windows.*
 */smaller_files/
+*/smaller_files_test/
+
 

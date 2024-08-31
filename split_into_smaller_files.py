@@ -16,18 +16,20 @@ NUM_SMALL_FILES = 20  # the number of smaller files
 def validate_path_and_values():
     log.info('Validating SOURCE_FILE_PATH...')
     if not os.path.exists(SOURCE_FILE_PATH):
+        log.error(f'Source path {SOURCE_FILE_PATH} does not exist')
         raise FileNotFoundError(
             f'The location "{SOURCE_FILE_PATH}" does not exist. Please '
             'check the path and try again.'
         )
 
     if not os.path.isfile(SOURCE_FILE_PATH):
+        log.error(f'Source path {SOURCE_FILE_PATH} is not a file')
         raise TypeError(
             f'The location "{SOURCE_FILE_PATH}" is not a file. Please '
             'ensure that the path points to a file and try again.'
         )
-
     log.info(f'{SOURCE_FILE_PATH} is valid file path')
+
     log.info('Validating DESTINATION_DIR...')
     if not os.path.exists(DESTINATION_DIR) or not os.path.isdir(DESTINATION_DIR):
         log.info(f'{DESTINATION_DIR} doesnt exist, creating a directory')
@@ -37,6 +39,7 @@ def validate_path_and_values():
 
     log.info('Validating SMALL_FILE_PREFIX...')
     if not isinstance(SMALL_FILE_PREFIX, str) or len(SMALL_FILE_PREFIX) < 1:
+        log.error(f'Small file name {SMALL_FILE_PREFIX} is not valid')
         raise ValueError(
             f'The name "{SMALL_FILE_PREFIX}" is not a valid name. Please '
             'ensure the input can be used as a valid file name.'
@@ -45,6 +48,7 @@ def validate_path_and_values():
 
     log.info('Validating NUM_SMALL_FILES...')
     if not isinstance(NUM_SMALL_FILES, int) or NUM_SMALL_FILES < 1:
+        log.error(f'Small files count {NUM_SMALL_FILES} is not valid')
         raise ValueError(
             f'The number "{NUM_SMALL_FILES}" is not valid. Please ensure the '
             'input number is a valid integer greater than 0 and try again.'
@@ -69,6 +73,7 @@ def main():
         NotADirectoryError,
         ValueError,
     ) as err:
+        log.error('Validation failed')
         sys.exit(err)
 
     source_file_size = os.path.getsize(SOURCE_FILE_PATH)
@@ -106,4 +111,7 @@ def main():
 
 
 if __name__ == '__main__':
+    process_start_time = time.time()
     main()
+    process_end_time = time.time() - process_start_time
+    log.info(f'The process took {process_end_time} seconds')

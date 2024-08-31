@@ -2,6 +2,7 @@ import logging
 import os
 import sys
 import time
+from typing import Tuple, Union
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
@@ -13,7 +14,7 @@ EXTENSION = '.txt'
 NUM_SMALL_FILES = 20  # the number of smaller files
 
 
-def validate_path_and_values():
+def validate_path_and_values() -> None:
     log.info('Validating SOURCE_FILE_PATH...')
     if not os.path.exists(SOURCE_FILE_PATH):
         log.error(f'Source path {SOURCE_FILE_PATH} does not exist')
@@ -56,13 +57,13 @@ def validate_path_and_values():
     log.info(f'{NUM_SMALL_FILES} is a valid number')
 
 
-def get_new_small_file_name_and_path(file_num):
+def get_new_small_file_name_and_path(file_num: Union[int, str]) -> Tuple[str, str]:
     file_name = SMALL_FILE_PREFIX + f'_{file_num}{EXTENSION}'
     file_path = os.path.join(DESTINATION_DIR, file_name)
     return file_name, file_path
 
 
-def main():
+def main() -> None:
     try:
         log.info('Starting validtion')
         validate_path_and_values()

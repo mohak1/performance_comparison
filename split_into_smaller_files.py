@@ -97,7 +97,7 @@ def main() -> None:
                 duration = time.time() - start_time
                 log.info(
                     f'Created {small_file_name} with size {curr_size} bytes in '
-                    f'{duration} seconds'
+                    f'{round(duration, 2)} seconds'
                 )
                 # resetting vairables; opening new file
                 file_num += 1
@@ -115,4 +115,4 @@ if __name__ == '__main__':
     process_start_time = time.time()
     main()
     process_end_time = time.time() - process_start_time
-    log.info(f'The process took {process_end_time} seconds')
+    log.info(f'The process took {round(process_end_time, 2)} seconds')

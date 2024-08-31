@@ -17,7 +17,11 @@ WORDS_TO_SEARCH = [
 ]
 
 
-def perform_case_insensitive_search(words: str, line: str, tracker: dict) -> None:
+def perform_case_insensitive_search(
+    words: str,
+    line: str,
+    tracker: dict
+) -> None:
     for word in words:
         tracker[word] += line.lower().count(word.lower())
 
@@ -51,7 +55,11 @@ def validate_path_and_words() -> None:
     log.info('WORDS_TO_SEARCH list contains valid entries')
 
 
-def process_file(file_name: str, dir_path: str, words_to_search: List[str]) -> None:
+def process_file(
+    file_name: str,
+    dir_path: str,
+    words_to_search: List[str]
+) -> None:
     file_path = os.path.join(dir_path, file_name)
     count_tracker = {i: 0 for i in words_to_search}
     start_time = time.time()

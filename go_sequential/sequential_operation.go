@@ -88,8 +88,8 @@ func process_file(
 		)
 	}
 	var duration = time.Since(start_time)
-	fmt.Printf("Completed searching %v. Results: %v. Time taken: %v seconds\n",
-		file_name, count_tracker, duration)
+	fmt.Printf("Completed searching %v. Results: %v. Time taken: %.2f seconds\n",
+		file_name, count_tracker, duration.Seconds())
 
 }
 
@@ -114,5 +114,5 @@ func main() {
 	var process_start_time = time.Now()
 	entrypoint()
 	var process_end_time = time.Since(process_start_time)
-	log.Printf("The process took %v seconds", process_end_time)
+	log.Printf("The process took %.2f seconds", process_end_time.Seconds())
 }

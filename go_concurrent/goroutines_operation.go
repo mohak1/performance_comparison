@@ -32,7 +32,6 @@ func perform_case_insensitive_search(
 		var lower_case_line = strings.ToLower(string(line))
 		tracker[string(word)] += strings.Count(lower_case_line, lower_case_word)
 	}
-	return
 }
 
 func validate_path_and_words() {

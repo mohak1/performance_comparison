@@ -121,7 +121,7 @@ func entrypoint() {
 }
 
 func main() {
-	var CPU_CORES = 20
+	var CPU_CORES = runtime.NumCPU()
 	log.Printf("Setting GOMAXPROCS at %v", CPU_CORES)
 	runtime.GOMAXPROCS(CPU_CORES)
 

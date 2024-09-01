@@ -8,7 +8,7 @@ from typing import List
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger()
 
-FILES_DIR = './text_files/smaller_files/'  # dir where log files are present
+FILES_DIR = '../text_files/smaller_files/'  # dir where log files are present
 WORDS_TO_SEARCH = [
     'Session',
     'Warning',

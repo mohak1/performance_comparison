@@ -25,12 +25,10 @@ func perform_case_insensitive_search(
 	line string,
 	tracker map[string]int,
 ) {
+	lower_case_line := strings.ToLower(line)
 	for _, word := range words {
-		var lower_case_word = strings.ToLower(string(word))
-		var lower_case_line = strings.ToLower(string(line))
-		tracker[string(word)] += strings.Count(lower_case_line, lower_case_word)
+		tracker[word] += strings.Count(lower_case_line, strings.ToLower(word))
 	}
-	return
 }
 
 func validate_path_and_words() {
@@ -65,8 +63,8 @@ func process_file(
 	dir_path string,
 	words_to_search []string,
 ) {
-	var file_path = path.Join(dir_path, file_name)
-	var count_tracker = make(map[string]int)
+	file_path := path.Join(dir_path, file_name)
+	count_tracker := make(map[string]int)
 	for _, word := range words_to_search {
 		count_tracker[word] = 0
 	}
@@ -80,7 +78,7 @@ func process_file(
 	var start_time = time.Now()
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		line := string(scanner.Text())
+		line := scanner.Text()
 		perform_case_insensitive_search(
 			words_to_search,
 			line,
